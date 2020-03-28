@@ -4,9 +4,8 @@
     public string url;
     public string sDate;
 
-    public ParameterLoadData(Tip text3dIn, string urlIn, string sDateIn)
+    public ParameterLoadData(string urlIn, string sDateIn)
     {
-        text3d = text3dIn;
         url = urlIn;
         sDate = sDateIn;
     }
