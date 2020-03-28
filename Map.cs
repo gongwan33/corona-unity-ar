@@ -15,9 +15,12 @@ public class Map : MonoBehaviour
     private int _iMaxDeaths = 0;
     private int _iMaxRecovered = 0;
     private bool _bBarVisibility = false;
+    private GameObject _oMapLoadObj;
+    private MapLoad _oMapLoad;
 
     public CovidDataShell covidData = null;
     public string baseUrl = "http://digigeek.cn:5000/corona/nz/YTExsed193847dkdIEDUCJkdslei394803/";
+    public string initialDate = "latest";
 
     private void _loadData(object textObj)
     {
@@ -57,6 +60,7 @@ public class Map : MonoBehaviour
         catch (WebException e)
         {
             Debug.LogError(e.Message);
+            _oMapLoad.tipText = "Oops... Network Error.";
         }
     }
 
@@ -152,9 +156,11 @@ public class Map : MonoBehaviour
     {
         _oRend = GetComponent<Renderer>();
         _sDataPath = Application.persistentDataPath;
+        _oMapLoadObj = GameObject.Find("MapLoad");
+        _oMapLoad = _oMapLoadObj.GetComponent<MapLoad>();
 
         _tData = new Thread(new ParameterizedThreadStart(_loadData));
-        ParameterLoadData param = new ParameterLoadData(baseUrl, "latest");
+        ParameterLoadData param = new ParameterLoadData(baseUrl, initialDate);
         _tData.Start(param);
     }
 
@@ -169,6 +175,11 @@ public class Map : MonoBehaviour
         if (_bCubesDrawed)
         {
             _oRend.enabled = true;
+
+            transform.position = _oMapLoadObj.transform.position;
+            transform.rotation = _oMapLoadObj.transform.rotation;
+            transform.localScale = _oMapLoadObj.transform.localScale;
+            _oMapLoadObj.SetActive(false);
         }
     }
 
