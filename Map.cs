@@ -35,7 +35,6 @@ public class Map : MonoBehaviour
             Debug.Log("Load from File");
             covidData = oData;
             Debug.Log(Utility.dumpObj(covidData));
-
             return;
         }
 
@@ -112,7 +111,7 @@ public class Map : MonoBehaviour
                 cubeRend.material.color = oBarColor;
 
                 cube.transform.parent = map.transform;
-                cube.transform.localScale = new Vector3(0.05f, ((float)loc.data.number / (float)iMaxNumber) * 1, 0.05f);
+                cube.transform.localScale = new Vector3(0.05f, ((float)loc.data.number / (float)iMaxNumber) * 2, 0.05f);
 
                 Vector3 cubeSize = cubeRend.bounds.size;
                 Vector3 moveVec = new Vector3(0, cubeSize.y / 2f, 0);
@@ -139,6 +138,16 @@ public class Map : MonoBehaviour
             }
 
         }
+    }
+
+    public void setVisible(bool isVisible)
+    {
+        _oRend.enabled = isVisible;
+    }
+
+    public bool isDrawed()
+    {
+        return _bCubesDrawed;
     }
 
     public void setBarVisible(bool isVisible)
@@ -170,16 +179,6 @@ public class Map : MonoBehaviour
         if (!_bCubesDrawed)
         {
             drawAllCubeTypes();
-        }
-
-        if (_bCubesDrawed)
-        {
-            _oRend.enabled = true;
-
-            transform.position = _oMapLoadObj.transform.position;
-            transform.rotation = _oMapLoadObj.transform.rotation;
-            transform.localScale = _oMapLoadObj.transform.localScale;
-            _oMapLoadObj.SetActive(false);
         }
     }
 
