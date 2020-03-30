@@ -160,6 +160,11 @@ public class Map : MonoBehaviour
         }
     }
 
+    public string getAppPath()
+    {
+        return _sDataPath;
+    }
+
     // Start is called before the first frame update
     void Start()
     {

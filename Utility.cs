@@ -144,7 +144,7 @@ public class Utility
         }
     }
 
-    public void deleteAllDat(string path)
+    public static void deleteAllDat(string path)
     {
         DirectoryInfo di = new DirectoryInfo(path);
         FileInfo[] files = di.GetFiles("*.dat");
