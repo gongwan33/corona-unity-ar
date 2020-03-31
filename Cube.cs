@@ -13,34 +13,43 @@ public class Cube : MonoBehaviour
     GameObject _oDetailInfoObj;
     DetailInfo _oDetailInfo;
 
+    GameObject _oAnchorObj;
+    Anchor _oAnchor;
+
     // Start is called before the first frame update
     void Start()
     {
         _oDetailInfoObj = GameObject.Find("DetailInfo");
         _oDetailInfo = _oDetailInfoObj.GetComponent<DetailInfo>();
+
+        _oAnchorObj = GameObject.Find("Anchor");
+        _oAnchor = _oAnchorObj.GetComponent<Anchor>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        // Construct a ray from the current touch coordinates
-        Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
-        RaycastHit hit;
-
-        // Create a particle if hit
-        if (Physics.Raycast(ray, out hit))
+        if(_oAnchor.bIsTracked)
         {
-            GameObject cubeObj = hit.transform.gameObject;
-            Cube cube = cubeObj.GetComponent<Cube>();
+            // Construct a ray from the current touch coordinates
+            Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
+            RaycastHit hit;
 
-            if (hit.transform.name == "Cylinder")
+            // Create a particle if hit
+            if (Physics.Raycast(ray, out hit))
             {
-                _oDetailInfo.setVisibility(true);
-                _oDetailInfo.setText($"{cube.sName}\r\n({dLng}, {dLat})\r\n{iNumber} {sType}");
-            }
-            else
-            {
-                _oDetailInfo.setVisibility(false);
+                GameObject cubeObj = hit.transform.gameObject;
+                Cube cube = cubeObj.GetComponent<Cube>();
+
+                if (hit.transform.name == "Cylinder")
+                {
+                    _oDetailInfo.setVisibility(true);
+                    _oDetailInfo.setText($"{cube.sName}\r\n({dLng}, {dLat})\r\n{iNumber} {sType}");
+                }
+                else
+                {
+                    _oDetailInfo.setVisibility(false);
+                }
             }
         }
     }
