@@ -10,6 +10,8 @@ public class Anchor : MonoBehaviour, ITrackableEventHandler
     private MapLoad _oMapLoad;
     private GameObject _oMapObj;
     private Map _oMap;
+    private GameObject _oDetailInfoObj;
+    private DetailInfo _oDetailInfo;
 
     public bool bIsTracked = false;
 
@@ -61,6 +63,9 @@ public class Anchor : MonoBehaviour, ITrackableEventHandler
 
         _oMapObj = GameObject.Find("Map");
         _oMap = _oMapObj.GetComponent<Map>();
+
+        _oDetailInfoObj = GameObject.Find("DetailInfo");
+        _oDetailInfo = _oDetailInfoObj.GetComponent<DetailInfo>();
     }
 
     // Update is called once per frame
@@ -74,6 +79,11 @@ public class Anchor : MonoBehaviour, ITrackableEventHandler
                 _oMapLoadObj.SetActive(false);
                 _oMapLoad.setVisible(false);
             }
+        }
+        else
+        {
+            _oDetailInfo.setText("");
+            _oDetailInfo.setVisibility(false);
         }
     }
 

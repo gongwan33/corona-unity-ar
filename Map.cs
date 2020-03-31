@@ -158,7 +158,7 @@ public class Map : MonoBehaviour
                 cubeRend.material.color = oBarColor;
 
                 cube.transform.parent = map.transform;
-                cube.transform.localScale = new Vector3(0.05f, ((float)loc.data.number / (float)iMaxNumber) * 2, 0.05f);
+                cube.transform.localScale = new Vector3(0.1f, ((float)loc.data.number / (float)iMaxNumber) * 2, 0.1f);
 
                 Vector3 cubeSize = cubeRend.bounds.size;
                 Vector3 moveVec = new Vector3(0, cubeSize.y / 2f, 0);

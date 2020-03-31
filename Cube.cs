@@ -36,7 +36,7 @@ public class Cube : MonoBehaviour
             if (hit.transform.name == "Cylinder")
             {
                 _oDetailInfo.setVisibility(true);
-                _oDetailInfo.setText($"{cube.sName}, ({dLng}, {dLat}) \r\n{iNumber} {sType}");
+                _oDetailInfo.setText($"{cube.sName}\r\n({dLng}, {dLat})\r\n{iNumber} {sType}");
             }
             else
             {
