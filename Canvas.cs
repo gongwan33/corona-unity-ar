@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Canvas : MonoBehaviour
 {
@@ -26,10 +27,31 @@ public class Canvas : MonoBehaviour
         else
         {
             //is a single click 
-            infoText.setInfo("Please double click to clear cache!", 100);
+            infoText.setInfo("Please double click to delete all cache!", 100);
         }
 
         _fLastClick = Time.time;
+    }
+
+    public void onDataTypeChange()
+    {
+        GameObject mapObj = GameObject.Find("Map");
+        Map map = mapObj.GetComponent<Map>();
+        GameObject typeDropdownObj = GameObject.Find("TypeDropdown");
+        Dropdown typeDropdown = typeDropdownObj.GetComponent<Dropdown>();
+
+        map.changeDataType(typeDropdown.value);
+    }
+
+    public void onDateChange()
+    {
+        GameObject mapObj = GameObject.Find("Map");
+        Map map = mapObj.GetComponent<Map>();
+
+        GameObject dateSliderObj = GameObject.Find("DateSlider");
+        DateSlider dateSlider = dateSliderObj.GetComponent<DateSlider>();
+
+        map.changeDate(dateSlider.getValue());
     }
 
     // Start is called before the first frame update

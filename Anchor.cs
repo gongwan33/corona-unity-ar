@@ -6,10 +6,14 @@ using Vuforia;
 public class Anchor : MonoBehaviour, ITrackableEventHandler
 {
     private TrackableBehaviour mTrackableBehaviour;
+    private GameObject _oMapLoadObj;
+    private MapLoad _oMapLoad;
+    private GameObject _oMapObj;
+    private Map _oMap;
 
     public bool bIsTracked = false;
 
-    void addToAnchor(GameObject obj)
+    public void addToAnchor(GameObject obj)
     {
         Map map = obj.GetComponent<Map>();
         obj.transform.parent = mTrackableBehaviour.transform;
@@ -17,6 +21,26 @@ public class Anchor : MonoBehaviour, ITrackableEventHandler
         obj.transform.localRotation = Quaternion.Euler(new Vector3(0, 90, 0));
 
         map.setVisible(true);
+    }
+
+    public void removeFromAnchor(GameObject obj)
+    {
+        Map map = obj.GetComponent<Map>();
+
+        map.setVisible(false);
+
+        obj.transform.parent = null;
+        obj.transform.position = new Vector3(0, 0, 0);
+        obj.transform.rotation = Quaternion.Euler(new Vector3(0, 180, 0));
+    }
+
+    public void setLoadingStatus()
+    {
+        if(bIsTracked) {
+            _oMapLoad.tipText = "Sychronizing COVID-19 data...";
+            _oMapLoadObj.SetActive(true);
+            _oMapLoad.setVisible(true);
+        }
     }
 
     // Start is called before the first frame update
@@ -28,23 +52,24 @@ public class Anchor : MonoBehaviour, ITrackableEventHandler
         {
             mTrackableBehaviour.RegisterTrackableEventHandler(this);
         }
+
+        _oMapLoadObj = GameObject.Find("MapLoad");
+        _oMapLoad = _oMapLoadObj.GetComponent<MapLoad>();
+
+        _oMapObj = GameObject.Find("Map");
+        _oMap = _oMapObj.GetComponent<Map>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        GameObject mapLoadObj = GameObject.Find("MapLoad");
-        Map mapLoad = mapLoadObj.GetComponent<Map>();
-
         if (bIsTracked)
         {
-            GameObject mapObj = GameObject.Find("Map");
-            Map map = mapObj.GetComponent<Map>();
-            if(map.isDrawed()) {
-                addToAnchor(mapObj);
+            if(_oMap.isDrawed()) {
+                addToAnchor(_oMapObj);
 
-                mapLoadObj.SetActive(false);
-                mapLoad.setVisible(false);
+                _oMapLoadObj.SetActive(false);
+                _oMapLoad.setVisible(false);
             }
         }
     }
