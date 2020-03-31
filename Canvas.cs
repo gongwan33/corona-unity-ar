@@ -54,6 +54,43 @@ public class Canvas : MonoBehaviour
         map.changeDate(dateSlider.getValue());
     }
 
+    public void onSliderPlus()
+    {
+        GameObject dateSliderObj = GameObject.Find("DateSlider");
+        DateSlider dateSlider = dateSliderObj.GetComponent<DateSlider>();
+
+        setDropdownEnable(false);
+        dateSlider.addOne();
+    }
+
+    public void onSliderMinus()
+    {
+        GameObject dateSliderObj = GameObject.Find("DateSlider");
+        DateSlider dateSlider = dateSliderObj.GetComponent<DateSlider>();
+
+        setDropdownEnable(false);
+        dateSlider.minusOne();
+    }
+
+    public void setButtonsEnable(bool isEnabled)
+    {
+        GameObject sliderMinusObj = GameObject.Find("SliderMinus");
+        Button sliderMinus = sliderMinusObj.GetComponent<Button>();
+        GameObject sliderPlusObj = GameObject.Find("SliderPlus");
+        Button sliderPlus = sliderPlusObj.GetComponent<Button>();
+
+        sliderPlus.enabled = isEnabled;
+        sliderMinus.enabled = isEnabled;
+    }
+
+    public void setDropdownEnable(bool isEnabled)
+    {
+        GameObject typeDropdownObj = GameObject.Find("TypeDropdown");
+        Dropdown typeDropdown = typeDropdownObj.GetComponent<Dropdown>();
+
+        typeDropdown.enabled = isEnabled;
+    }
+
     // Start is called before the first frame update
     void Start()
     {

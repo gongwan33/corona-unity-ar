@@ -22,6 +22,10 @@ public class Map : MonoBehaviour
     private DateSlider _oDateSlider;
     private GameObject _oDateTextObj;
     private DateText _oDateText;
+    private GameObject _oAnchorObj;
+    private Anchor _oAnchor;
+    private GameObject _oCanvasObj;
+    private Canvas _oCanvas;
 
     public CovidDataShell covidData = null;
     public string baseUrl = "http://digigeek.cn:5000/corona/nz/YTExsed193847dkdIEDUCJkdslei394803/";
@@ -58,39 +62,51 @@ public class Map : MonoBehaviour
             Debug.Log("Load from File");
             covidData = oData;
             Debug.Log(Utility.dumpObj(covidData));
-
-            _oDateSlider.setEnable(true);
-            _oDateSlider.setLength(getCurrentDateList(covidData).Length);
-            
-            return;
         }
-
-        try
+        else
         {
-            using (WebClient wc = new WebClient())
+            try
             {
-                // Debug.Log("Loading data from " + targetUrl + sDate);
-                var json = wc.DownloadString(targetUrl + sDate);
-                covidData = JsonUtility.FromJson<CovidDataShell>(json);
-                Debug.Log(Utility.dumpObj(covidData));
-
-                string sCurrent = sToday;
-                if(covidData != null && covidData.confirmed != null && covidData.confirmed.Length > 0
-                && covidData.confirmed[0].data != null && covidData.confirmed[0].data.number != -1)
+                using (WebClient wc = new WebClient())
                 {
-                    sCurrent = covidData.confirmed[0].data.date;
-                    Utility.saveFile(_sDataPath, sDate == "latest" ? sCurrent : sDate, covidData);
-                }
+                    // Debug.Log("Loading data from " + targetUrl + sDate);
+                    var json = wc.DownloadString(targetUrl + sDate);
+                    covidData = JsonUtility.FromJson<CovidDataShell>(json);
+                    Debug.Log(Utility.dumpObj(covidData));
 
-                _oDateSlider.setEnable(true);
-                _oDateSlider.setLength(getCurrentDateList(covidData).Length);
+                    string sCurrent = sToday;
+                    if (covidData != null && covidData.confirmed != null && covidData.confirmed.Length > 0
+                    && covidData.confirmed[0].data != null && covidData.confirmed[0].data.number != -1)
+                    {
+                        sCurrent = covidData.confirmed[0].data.date;
+                        Utility.saveFile(_sDataPath, sDate == "latest" ? sCurrent : sDate, covidData);
+                    }
+                }
+            }
+            catch (WebException e)
+            {
+                Debug.LogError(e.Message);
+                _oMapLoad.tipText = "Oops... Network Error.";
+
+                return;
             }
         }
-        catch (WebException e)
+
+        if(covidData != null)
         {
-            Debug.LogError(e.Message);
-            _oMapLoad.tipText = "Oops... Network Error.";
+            string[] dateList = getCurrentDateList(covidData);
+            _oDateSlider.setLength(dateList.Length);
+
+            if (sDate == "latest")
+            {
+                _oDateSlider.setValue(_oDateSlider.getMax());
+                _oDateText.setText(dateList[dateList.Length - 1]);
+            }
         }
+
+        _oDateSlider.setEnable(true);
+        _oCanvas.setButtonsEnable(true);
+
     }
 
     void drawCubes(CovidLocation[] oLocations, string type = "confirmed")
@@ -197,11 +213,8 @@ public class Map : MonoBehaviour
 
     public void changeDataType(int typeNum)
     {
-        GameObject anchorObj = GameObject.Find("Anchor");
-        Anchor anchor = anchorObj.GetComponent<Anchor>();
-
-        anchor.removeFromAnchor(GameObject.Find("Map"));
-        anchor.setLoadingStatus();
+        _oAnchor.removeFromAnchor(GameObject.Find("Map"));
+        _oAnchor.setLoadingStatus();
 
         clearBars();
 
@@ -225,7 +238,13 @@ public class Map : MonoBehaviour
 
     public void changeDate(int dateIndex)
     {
+        string[] currentDateList = getCurrentDateList(covidData);
+
+        covidData = null;
+        _bCubesDrawed = false;
+
         _oDateSlider.setEnable(false);
+        _oCanvas.setButtonsEnable(false);
 
         GameObject anchorObj = GameObject.Find("Anchor");
         Anchor anchor = anchorObj.GetComponent<Anchor>();
@@ -234,8 +253,6 @@ public class Map : MonoBehaviour
         anchor.setLoadingStatus();
 
         clearBars();
-
-        string[] currentDateList = getCurrentDateList(covidData);
 
         _oDateText.setText(currentDateList[dateIndex]);
 
@@ -270,6 +287,10 @@ public class Map : MonoBehaviour
         _oDateSlider = _oDateSliderObj.GetComponent<DateSlider>();
         _oDateTextObj = GameObject.Find("DateText");
         _oDateText = _oDateTextObj.GetComponent<DateText>();
+        _oAnchorObj = GameObject.Find("Anchor");
+        _oAnchor = _oAnchorObj.GetComponent<Anchor>();
+        _oCanvasObj = GameObject.Find("Canvas");
+        _oCanvas = _oCanvasObj.GetComponent<Canvas>();
 
         _tData = new Thread(new ParameterizedThreadStart(_loadData));
         ParameterLoadData param = new ParameterLoadData(baseUrl, initialDate);
@@ -279,7 +300,7 @@ public class Map : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!_bCubesDrawed)
+        if (!_bCubesDrawed && covidData != null)
         {
             switch(_sCurrentDataType)
             {
@@ -295,6 +316,11 @@ public class Map : MonoBehaviour
                     drawCubeWrapper(covidData.recovered);
                     break;
             }
+        }
+
+        if(covidData != null)
+        {
+            _oCanvas.setDropdownEnable(true);
         }
     }
 

@@ -29,7 +29,7 @@ public class Anchor : MonoBehaviour, ITrackableEventHandler
 
         map.setVisible(false);
 
-        obj.transform.parent = null;
+        obj.transform.SetParent(null);
         obj.transform.position = new Vector3(0, 0, 0);
         obj.transform.rotation = Quaternion.Euler(new Vector3(0, 180, 0));
     }
@@ -40,7 +40,10 @@ public class Anchor : MonoBehaviour, ITrackableEventHandler
             _oMapLoad.tipText = "Sychronizing COVID-19 data...";
             _oMapLoadObj.SetActive(true);
             _oMapLoad.setVisible(true);
+            _oMapLoad.setBlinking(true);
         }
+
+        _oMap.setVisible(false);
     }
 
     // Start is called before the first frame update

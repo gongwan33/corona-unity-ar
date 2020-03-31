@@ -18,9 +18,35 @@ public class DateSlider : MonoBehaviour
         return (int)_oSlider.value;
     }
 
+    public void setValue(float val)
+    {
+        _oSlider.value = val;
+    }
+
+    public float getMax()
+    {
+        return _oSlider.maxValue;
+    }
+
     public void setEnable(bool isEnabled)
     {
         _oSlider.enabled = isEnabled;
+    }
+
+    public void addOne()
+    { 
+        if (_oSlider.value < _oSlider.maxValue)
+        {
+            _oSlider.value = _oSlider.value + 1;
+        }
+    }
+
+    public void minusOne()
+    {
+        if (_oSlider.value > _oSlider.minValue)
+        {
+            _oSlider.value = _oSlider.value - 1;
+        }
     }
 
     // Start is called before the first frame update

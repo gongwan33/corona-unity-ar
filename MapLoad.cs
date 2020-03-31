@@ -16,6 +16,12 @@ public class MapLoad : MonoBehaviour
     public void setVisible(bool isVisible)
     {
         _oRend.enabled = isVisible;
+        _tip.isShow = isVisible;
+    }
+
+    public void setBlinking(bool isBlink)
+    {
+        _tip.isBlink = isBlink;
     }
 
     // Start is called before the first frame update
