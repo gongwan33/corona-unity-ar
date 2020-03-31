@@ -3,6 +3,7 @@ using System.Net;
 using System.Threading;
 using System;
 using System.Collections.Generic;
+using UnityEngine.EventSystems;
 
 public class Map : MonoBehaviour
 {
@@ -166,6 +167,14 @@ public class Map : MonoBehaviour
 
                 cube.transform.position = mapPos + moveVec;
 
+                cube.AddComponent<Cube>();
+                Cube cubeComp = cube.GetComponent<Cube>();
+                cubeComp.sName = loc.name;
+                cubeComp.dLat = loc.lat;
+                cubeComp.dLng = loc.lng;
+                cubeComp.iNumber = loc.data.number;
+                cubeComp.sType = _sCurrentDataType;
+             
                 _lBars.Add(new DataBar(loc.lat, loc.lng, loc.data.number, loc.name,
                 loc.data.date, ref cube));
             }
