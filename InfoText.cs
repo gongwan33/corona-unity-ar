@@ -9,6 +9,7 @@ public class InfoText : MonoBehaviour
     private Text _oText;
 
     public string initialText;
+    public int initialTextShowTime = 260;
 
     public void setInfo(string text, int delay)
     {
@@ -24,7 +25,7 @@ public class InfoText : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        setInfo(initialText, 180);
+        setInfo(initialText, initialTextShowTime);
     }
 
     // Update is called once per frame
