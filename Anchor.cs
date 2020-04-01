@@ -20,7 +20,7 @@ public class Anchor : MonoBehaviour, ITrackableEventHandler
         Map map = obj.GetComponent<Map>();
         obj.transform.parent = mTrackableBehaviour.transform;
         obj.transform.localPosition = new Vector3(0f, 0f, 0f);
-        obj.transform.localRotation = Quaternion.Euler(new Vector3(0, 90, 0));
+        obj.transform.localRotation = Quaternion.Euler(new Vector3(0, 180, 0));
 
         map.setVisible(true);
     }
@@ -91,8 +91,11 @@ public class Anchor : MonoBehaviour, ITrackableEventHandler
               TrackableBehaviour.Status previousStatus,
               TrackableBehaviour.Status newStatus)
     {
+        Debug.Log("Status Changed!!!");
+        Debug.Log(newStatus);
         if (newStatus == TrackableBehaviour.Status.DETECTED ||
-            newStatus == TrackableBehaviour.Status.TRACKED)
+            newStatus == TrackableBehaviour.Status.TRACKED ||
+            newStatus == TrackableBehaviour.Status.EXTENDED_TRACKED)
         {
             OnTrackingFound();
         }
