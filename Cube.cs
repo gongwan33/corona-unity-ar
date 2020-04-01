@@ -16,6 +16,9 @@ public class Cube : MonoBehaviour
     GameObject _oAnchorObj;
     Anchor _oAnchor;
 
+    GameObject _oMapObj;
+    Map _oMap;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -24,6 +27,9 @@ public class Cube : MonoBehaviour
 
         _oAnchorObj = GameObject.Find("Anchor");
         _oAnchor = _oAnchorObj.GetComponent<Anchor>();
+
+        _oMapObj = GameObject.Find("Map");
+        _oMap = _oMapObj.GetComponent<Map>();
     }
 
     // Update is called once per frame
@@ -41,15 +47,20 @@ public class Cube : MonoBehaviour
                 GameObject cubeObj = hit.transform.gameObject;
                 Cube cube = cubeObj.GetComponent<Cube>();
 
-                if (hit.transform.name == "Cylinder")
+                if (hit.transform.name == "Cylinder" && _oMap.isVisible())
                 {
                     _oDetailInfo.setVisibility(true);
-                    _oDetailInfo.setText($"{cube.sName}\r\n({dLng}, {dLat})\r\n{iNumber} {sType}");
+                    _oDetailInfo.setText($"{cube.sName}\r\n({string.Format("{0:0.0000}", cube.dLng)}, " +
+                    	$"{string.Format("{0:0.0000}", cube.dLat)})\r\n{cube.iNumber} {cube.sType}");
                 }
                 else
                 {
                     _oDetailInfo.setVisibility(false);
                 }
+            }
+            else
+            {
+                _oDetailInfo.setVisibility(false);
             }
         }
     }

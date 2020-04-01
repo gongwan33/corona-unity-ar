@@ -270,6 +270,11 @@ public class Map : MonoBehaviour
         _tData.Start(param);
     }
 
+    public bool isVisible()
+    {
+        return _oRend.enabled;
+    }
+
     void clearBars()
     {
         if(_lBars == null || _lBars.Count <= 0)
