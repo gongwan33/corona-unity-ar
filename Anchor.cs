@@ -91,8 +91,6 @@ public class Anchor : MonoBehaviour, ITrackableEventHandler
               TrackableBehaviour.Status previousStatus,
               TrackableBehaviour.Status newStatus)
     {
-        Debug.Log("Status Changed!!!");
-        Debug.Log(newStatus);
         if (newStatus == TrackableBehaviour.Status.DETECTED ||
             newStatus == TrackableBehaviour.Status.TRACKED ||
             newStatus == TrackableBehaviour.Status.EXTENDED_TRACKED)

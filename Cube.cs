@@ -32,10 +32,9 @@ public class Cube : MonoBehaviour
         _oMap = _oMapObj.GetComponent<Map>();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        if(_oAnchor.bIsTracked)
+        if (_oAnchor.bIsTracked)
         {
             // Construct a ray from the current touch coordinates
             Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
@@ -51,7 +50,7 @@ public class Cube : MonoBehaviour
                 {
                     _oDetailInfo.setVisibility(true);
                     _oDetailInfo.setText($"{cube.sName}\r\n({string.Format("{0:0.0000}", cube.dLng)}, " +
-                    	$"{string.Format("{0:0.0000}", cube.dLat)})\r\n{cube.iNumber} {cube.sType}");
+                        $"{string.Format("{0:0.0000}", cube.dLat)})\r\n{cube.iNumber} {cube.sType}");
                 }
                 else
                 {
