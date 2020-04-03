@@ -1039,7 +1039,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 600, y: 100}
+  m_SizeDelta: {x: 650, y: 130}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &245434146
 MonoBehaviour:
@@ -1072,7 +1072,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 
+  m_Text: jjkhjjklhlkhkjj
 --- !u!222 &245434147
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1093,7 +1093,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cfabb0440166ab443bba8876756fdfa9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
+  m_EffectColor: {r: 1, g: 0.9858491, b: 0.9858491, a: 0.65882355}
   m_EffectDistance: {x: 2, y: -1}
   m_UseGraphicAlpha: 1
 --- !u!114 &245434149
@@ -1108,8 +1108,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97f1e3316bec6425b856e57886b2ef6a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initialText: Please target a flat plane then click the screen to place the map.
-  initialTextShowTime: 260
+  initialText: Please target a flat plane (a rectangle will indicate an eligible
+    plane) then click the screen.
+  initialTextShowTime: -1
 --- !u!1 &495932582
 GameObject:
   m_ObjectHideFlags: 0
@@ -3574,8 +3575,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 600, y: 100}
+  m_AnchoredPosition: {x: 0, y: 125}
+  m_SizeDelta: {x: 650, y: 130}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1926446262
 GameObject:

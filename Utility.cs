@@ -127,7 +127,16 @@ public class Utility
             }
 
             BinaryFormatter bf = new BinaryFormatter();
-            CovidDataShell data = (CovidDataShell)bf.Deserialize(file);
+            CovidDataShell data = null;
+            try
+            {
+                data = (CovidDataShell)bf.Deserialize(file);
+            }
+            catch (Exception e)
+            {
+                Debug.Log(e.Message);
+            }
+
             file.Close();
 
             return data;
