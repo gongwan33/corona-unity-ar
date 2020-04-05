@@ -238,7 +238,9 @@ public class Map : MonoBehaviour
                 cubeComp.dLng = loc.lng;
                 cubeComp.iNumber = loc.data.number;
                 cubeComp.sType = _sCurrentDataType;
-             
+                cubeComp.dScale = ((float)loc.data.number / (float)iMaxNumber) * 2;
+
+
                 _lBars.Add(new DataBar(loc.lat, loc.lng, loc.data.number, loc.name,
                 loc.data.date, ref cube));
             }
