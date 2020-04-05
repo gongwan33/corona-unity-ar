@@ -12,18 +12,18 @@ public class Cube : MonoBehaviour
     public string sType;
     public double dScale;
 
-    GameObject _oDetailInfoObj;
-    DetailInfo _oDetailInfo;
+    private GameObject _oDetailInfoObj;
+    private DetailInfo _oDetailInfo;
 
-    GameObject _oAnchorObj;
-    Anchor _oAnchor;
+    private GameObject _oAnchorObj;
+    private Anchor _oAnchor;
 
-    GameObject _oMapObj;
-    Map _oMap;
+    private GameObject _oMapObj;
+    private Map _oMap;
 
     private static GameObject _oBarTextObj = null;
     private static TextMesh _oBarTextMesh = null;
-    private static float _fRotateSpeed = 0.3f;
+    private static float _fRotateSpeed = 0.4f;
 
     public float getCubeHeight(GameObject obj)
     {
@@ -63,7 +63,7 @@ public class Cube : MonoBehaviour
                     _oDetailInfo.setText($"{cube.sName}\r\n({string.Format("{0:0.0000}", cube.dLng)}, " +
                         $"{string.Format("{0:0.0000}", cube.dLat)})\r\n{cube.iNumber} {cube.sType}");
 
-                    if (Math.Abs(hit.distance) > 0 && Math.Abs(hit.distance) < 1)
+                    if (Math.Abs(hit.distance) > 0 && Math.Abs(hit.distance) < 2)
                     {
                         if(_oBarTextObj == null)
                         {
@@ -78,6 +78,25 @@ public class Cube : MonoBehaviour
 
                         _oBarTextMesh = _oBarTextObj.GetComponent<TextMesh>();
                         _oBarTextMesh.text = cube.iNumber.ToString();
+
+                        switch(cube.sType )
+                        {
+                            case "confirmed":
+                                _oBarTextMesh.color = Color.red;
+                                break;
+
+                            case "deaths":
+                                _oBarTextMesh.color = Color.black;
+                                break;
+
+                            case "recovered":
+                                _oBarTextMesh.color = Color.green;
+                                break;
+
+                            default:
+                                _oBarTextMesh.color = Color.red;
+                                break;
+                        } 
                     }
                 }
                 else
