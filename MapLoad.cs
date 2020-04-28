@@ -13,7 +13,7 @@ public class MapLoad : MonoBehaviour
     private GameObject _oInfoTextObj;
     private InfoText _oInfoText;
 
-    public string tipText = "Sychronizing COVID-19 data...";
+    public string tipText = "Sychronizing online data...";
 
     public void setVisible(bool isVisible)
     {

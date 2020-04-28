@@ -39,7 +39,7 @@ public class Anchor : MonoBehaviour, ITrackableEventHandler
     public void setLoadingStatus()
     {
         if(bIsTracked) {
-            _oMapLoad.tipText = "Sychronizing COVID-19 data...";
+            _oMapLoad.tipText = "Sychronizing online data...";
             _oMapLoadObj.SetActive(true);
             _oMapLoad.setVisible(true);
             _oMapLoad.setBlinking(true);

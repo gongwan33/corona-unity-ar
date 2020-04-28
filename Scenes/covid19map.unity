@@ -1251,7 +1251,7 @@ PrefabInstance:
     - target: {fileID: 3566818113782286136, guid: 36bab62c586e846d19c67ac97f5ce6e4,
         type: 3}
       propertyPath: tipText
-      value: Sychronizing COVID-19 data...
+      value: Sychronizing online data...
       objectReference: {fileID: 0}
     - target: {fileID: 8681999585774080612, guid: 36bab62c586e846d19c67ac97f5ce6e4,
         type: 3}
@@ -1338,6 +1338,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0.1
       objectReference: {fileID: 0}
+    - target: {fileID: 8681999585880857686, guid: 36bab62c586e846d19c67ac97f5ce6e4,
+        type: 3}
+      propertyPath: m_Text
+      value: Sychronizing online data...
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 36bab62c586e846d19c67ac97f5ce6e4, type: 3}
 --- !u!1 &650378850
@@ -1410,7 +1415,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Covid 19 Realtime Data
+  m_Text: AR Covid-19 Map
 --- !u!222 &650378853
 CanvasRenderer:
   m_ObjectHideFlags: 0

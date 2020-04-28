@@ -60,8 +60,11 @@ public class Cube : MonoBehaviour
                 if (hit.transform.name == "Cylinder" && _oMap.isVisible())
                 {
                     _oDetailInfo.setVisibility(true);
+                    //_oDetailInfo.setText($"{cube.sName}\r\n({string.Format("{0:0.0000}", cube.dLng)}, " +
+                        //$"{string.Format("{0:0.0000}", cube.dLat)})\r\n{cube.iNumber} {cube.sType}");
                     _oDetailInfo.setText($"{cube.sName}\r\n({string.Format("{0:0.0000}", cube.dLng)}, " +
-                        $"{string.Format("{0:0.0000}", cube.dLat)})\r\n{cube.iNumber} {cube.sType}");
+                        $"{string.Format("{0:0.0000}", cube.dLat)})\r\n{cube.iNumber}");
+
 
                     if (Math.Abs(hit.distance) > 0 && Math.Abs(hit.distance) < 2)
                     {
